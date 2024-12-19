@@ -1,0 +1,37 @@
+{% extends "layout1.html" %}
+
+{% block title %}
+    Rate Professional Based on Service
+{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h3 class=heading style="margin-top:10%;">Rate Professional for their Service</h3>
+</div>
+<div class="input_forms" style="background-color:azure; margin-top:4%;">
+    <form method="POST" action="/rate_professional/{{cust_username}}/{{request_id}}">
+        <div class="mb-3">
+            
+            <br>
+            <p>Please rate the professional based on the service:</p>
+            <br>
+
+            <!-- Rating options: 1, 2, 3, 4, Fraud -->
+            <label for="rating">Select Rating:</label><br><br>
+            <select name="rating" id="rating" required>
+                <option value="" disabled selected>Select Rating</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+            <br><br>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-outline-success">Submit Rating</button>
+        <span><a role="button" class="btn btn-outline-warning" href="/customer_dashboard/{{cust_username}}">Return to Home</a></span>
+    </form>
+</div>
+{% endblock %}

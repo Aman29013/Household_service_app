@@ -1,0 +1,233 @@
+{% extends "layout2.html" %}
+
+{% block title %}
+Admin's Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div id="serv_t" class="center tab tabheading">
+  <br>
+  <h3>Services</h3>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        
+        <th scope="col">Service Name</th>
+        <th scope="col">Service ID</th>
+        <th scope="col">Base Price</th>
+        
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if services %}
+      {% for service in services %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        
+        <td>{{service.service_name}}</td>
+        <td>{{service.service_id}}</td>
+        <td>{{service.base_price}}</td>
+        
+        <td><span style="margin:1px;"><a href="/update/{{admin_username}}/{{service.service_id}}" role="button"
+              class="btn btn-outline-warning">Edit</a></span><span style="margin:1px;"><a href="/delete/{{admin_username}}/{{service.service_id}}"
+              role="button" class="btn btn-outline-danger">Delete</button></span></td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="4">
+          <h3>No Service Found!</h3>
+        </td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<br>
+<div><a href="/new_service/{{ admin_username }}" class="btn btn-secondary" style="margin-left:5%;" role="button">+Add New Service</a></div>
+<br>
+</div>
+<div class="center tab tabheading">
+  <br>
+  <h3>Professionals </h3>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Experience(in years)</th>
+        <th scope="col">Service Name</th>
+        <th scope="col">Rating(out of 5)</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for professional in professionals %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td><a class="profile" href="/professional_profile/{{professional.username}}">{{professional.username}}</a></td>
+        <td>{{professional.name}}</td>
+        <td>{{professional.experience}}</td>
+        <td>{{professional.service_name}}</td>
+        <td>{{professional.rating}}</td>
+        <!-- <td><span style="margin:1px;"><button type="button" class="btn btn-dark">Accept</button></span><span
+            style="margin:1px;"><button type="button" class="btn btn-dark">Block</button></span>
+            <span style="margin:1px;"><button type="button" class="btn btn-dark">Delete</button></span></td> -->
+        
+        <td>{% if professional.block_status == "active" %}
+
+Active
+        <span style="margin:1px;"><a href="/blockP/{{ admin_username }}/{{professional.username}}" role="button"
+          class="btn btn-outline-warning">Block</a></span>
+        {% else  %}
+        Blocked
+        
+        <span style="margin:1px;"><a href="/unblockP/{{ admin_username }}/{{professional.username}}" role="button"
+          class="btn btn-outline-success">Unblock</a></span>
+        
+        {% endif %}
+        <span style="margin:1px;"><a href="/deleteP/{{ admin_username }}/{{professional.username}}" role="button"
+          class="btn btn-outline-danger">Delete</a></span>
+      </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="center tab tabheading">
+  <br>
+  <h3>Customers </h3>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td><a class="profile" href="/customer_profile/{{customer.username}}">{{customer.username}}</a></td>
+        <td>{{customer.name}}</td>
+        <td>{{customer.address}},{{customer.pincode}}</td>
+        <!-- <td><span style="margin:1px;"><button type="button" class="btn btn-dark">Accept</button></span><span
+            style="margin:1px;"><button type="button" class="btn btn-dark">Block</button></span>
+            <span style="margin:1px;"><button type="button" class="btn btn-dark">Delete</button></span></td> -->
+        
+        <td>{% if customer.block_status == "active" %}
+
+Active
+        <span style="margin:1px;"><a href="/blockC/{{ admin_username }}/{{customer.username}}" role="button"
+          class="btn btn-outline-warning">Block</a></span>
+        {% else  %}
+        Blocked
+        
+        <span style="margin:1px;"><a href="/unblockC/{{ admin_username }}/{{customer.username}}" role="button"
+          class="btn btn-outline-success">Unblock</a></span>
+        
+        {% endif %}
+        <span style="margin:1px;"><a href="/deleteC/{{ admin_username }}/{{customer.username}}" role="button"
+          class="btn btn-outline-danger">Delete</a></span>
+      </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="center tab tabheading">
+  <br>
+  <h3>Service Proposals </h3>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Experience(in years)</th>
+        <th scope="col">Service Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for proposal in proposals %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td><a class="profile" href="/proposed_professional_profile/{{proposal.professional_username}}">{{proposal.professional_username}}</a></td>
+        <td>{{proposal.name}}</td>
+        <td>{{proposal.experience}}</td>
+        <td>{{proposal.service_name}}</td>
+        <!-- <td><span style="margin:1px;"><button type="button" class="btn btn-dark">Accept</button></span><span
+            style="margin:1px;"><button type="button" class="btn btn-dark">Block</button></span>
+            <span style="margin:1px;"><button type="button" class="btn btn-dark">Delete</button></span></td> -->
+        
+        <td>{% if proposal.status == "pending" %}
+
+Pending
+        <span style="margin:1px;"><a href="/acceptP/{{ admin_username }}/{{proposal.professional_username}}" role="button"
+          class="btn btn-outline-success">Accept</a></span>
+          <span style="margin:1px;"><a href="/rejectP/{{ admin_username }}/{{proposal.professional_username}}" role="button"
+            class="btn btn-outline-danger">Reject</a></span>
+        
+        
+        {% endif %}
+        
+      </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="center tab tabheading" style="margin-bottom:15px;">
+  <br>
+  <h3>Service Requests</h3>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Service-Id</th>
+        <th scope="col">Assigned-Customer's Email</th>
+        <th scope="col">Professional's Email</th>
+        <th scope="col">Requested Date</th>
+        <th scope="col">Offered-price</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in requests %}
+      <tr>
+        <th scope="row"><a class="profile" href="#serv_t">{{request.service_id}}</a></th>
+        <td><a class="profile" href="/customer_profile/{{request.customer_username}}">{{request.customer_username}}</td>
+        
+        
+        <td><a class="profile" href="/professional_profile/{{request.professional_username}}">{{request.professional_username}}</a></td>
+        
+        <td>{{request.requested_date}}</td>
+        <td>{{request.offered_price}}</td>
+        <td>{{request.status}}</td>
+        <td><span style="margin:1px;"><a href="/deleteR/{{ admin_username }}/{{request.request_id}}" role="button"
+          class="btn btn-outline-danger">Delete</a></span></td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock %}

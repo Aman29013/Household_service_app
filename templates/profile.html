@@ -1,0 +1,80 @@
+{% extends "layout1.html" %}
+
+{% block title %}
+    {{ user.name if user else "Profile" }}
+{% endblock %}
+
+{% block content %}
+<div class="center" style="padding-top:50px;">
+  {% if user %}
+    <h2>Welcome to {{ user.name }}'s Profile</h2>
+  {% else %}
+    <h4>{{ message }}</h4>
+    <a href="{{ previous_page }}" class="btn btn-outline-warning">Go Back</a>
+    {% endif %}
+</div>
+
+{% if user %}
+<div class="input_forms" style="background-color: azure;">
+  <form>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username (Email)</label>
+      <input type="email" name="username" class="form-control" id="username" value="{{ user.username }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Full Name</label>
+      <input type="text" name="name" class="form-control" id="name" value="{{ user.name }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" name="address" class="form-control" id="address" value="{{ user.address }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="pincode" class="form-label">Pincode</label>
+      <input type="text" name="pincode" class="form-control" id="pincode" value="{{ user.pincode }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input type="text" name="phone" class="form-control" id="phone" value="{{ user.phone }}" readonly>
+    </div>
+
+    {% if user_type == "professional" %}
+      <div class="mb-3">
+        <label for="service_name" class="form-label">Service Name</label>
+        <input type="text" name="service_name" class="form-control" id="service_name" value="{{ user.service_name }}" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="experience" class="form-label">Experience</label>
+        <input type="text" name="experience" class="form-control" id="experience" value="{{ user.experience }}" readonly>
+      </div>
+      {% if approved %}
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating(out of 5)</label>
+        <input type="text" name="rating" class="form-control" id="rating" value="{{ user.rating }}" readonly>
+      </div>
+      {% endif %}
+      
+      <div class="mb-3">
+        <label for="file" class="form-label">ID</label>
+        <div>
+          <img src="{{ url_for('static', filename='uploaded_files/' + user.username+'.png') }}" alt="ID Not Found" class="img-fluid" id="file" style="max-width: 100%;padding:5px; height: auto; border:1px solid rgb(83, 181, 220); border-radius: 10px;">
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mb-3">
+      <label for="block_status" class="form-label">Status</label>
+      <input type="text" name="block_status" class="form-control" id="block_status" value="{{ user.block_status }}" readonly>
+    </div>
+
+    <br>
+    <a href="{{ previous_page }}" class="btn btn-outline-warning">Go Back</a>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

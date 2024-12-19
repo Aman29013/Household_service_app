@@ -1,0 +1,78 @@
+{% extends "layout1.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+<div class="center" style="padding-top:50px;">
+  <h1 class="heading" >Welcome to Household Service Platform</h1>
+</div>
+<div class="input_forms"style="background-color:azure;">
+  <div class="center"><h3 style="color:rgb(89, 89, 253)"class="heading">Professional's Registeration</h3></div>
+  <br>
+  
+  <form action="/professionalR" enctype="multipart/form-data" method="POST">
+    <div class="mb-3">
+      <label for="username" class="form-label" >Username(Email)</label>
+      <input type="email" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter Your Email" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password"name="password" class="form-control" id="password"placeholder="Enter Your Password" required>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label" >Full Name</label>
+      <input type="text" name="full_name" class="form-control" id="name" aria-describedby="emailHelp"placeholder="Enter Your Full Name" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label" >Address</label>
+      <input type="address" name="address"class="form-control" id="address" aria-describedby="emailHelp"placeholder="Enter Your Address" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="service" class="form-label" >Service Name</label>
+      <select name="service"class="form-control" id="service" required>
+        <option value="" disabled selected>Select Your Service</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Painter">Painter</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Cleaner">Cleaner</option>
+
+      </select>
+
+    </div>
+    <div class="mb-3">
+      <label for="experience" class="form-label" >Experience(in Years)</label>
+      <input type="number"name="experience" class="form-control" id="experience" aria-describedby="emailHelp"placeholder="Enter Your Experience" required>
+
+    </div>
+    
+    <div class="mb-3">
+      <label for="pincode" class="form-label" >Pincode</label>
+      <input type="number" name="pincode" class="form-control" id="pincode" aria-describedby="emailHelp" placeholder="Enter Your Pincode"required>
+
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label" >Phone No.</label>
+      <input type="tel" pattern="[0-9]{10}" maxlength="10" title="Phone number must be exactly 10 digits" name="phone" class="form-control" id="phone" aria-describedby="emailHelp"placeholder="Enter Your Phone Number" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="file" class="form-label">Upload ID(.png)</label>
+      <input type="file" title="upload .png file" name="file" class="form-control" id="phone" placeholder="Upload Your Identity Proof" required>
+  
+    </div>
+  
+  
+   
+    <br><p class="warning">{{message}}</p>
+    <button type="submit" class="btn btn-dark">Register</button>
+    <br><br> <a href="/"style="text-decoration:None" class="btn btn-outline-primary">Go for Login </a>
+    
+  </form>
+</div>
+{% endblock %}

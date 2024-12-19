@@ -1,0 +1,53 @@
+{% extends "layout1.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+<div class="center" style="padding-top:50px;">
+  <h1 class="heading" >Welcome to Household Service Platform</h1>
+</div>
+<div class="input_forms"style="background-color:azure;">
+  <div class="center"><h3 style="color:rgb(89, 89, 253)"class="heading">Customer's Registeration</h3></div>
+  <br>
+  
+  <form action="/customerR" method="POST">
+    <div class="mb-3">
+      <label for="username" class="form-label" >Username(email)</label>
+      <input type="email" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your Email"required >
+
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password" required>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label" >Full Name</label>
+      <input type="text" name="full_name" class="form-control" id="name" aria-describedby="emailHelp"placeholder="Enter your Full Name" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label" >Address</label>
+      <input type="address"name="address" class="form-control" id="address" aria-describedby="emailHelp"placeholder="Enter your Address" required>
+
+    </div>
+    <div class="mb-3">
+      <label for="pincode" class="form-label" >Pincode</label>
+      <input type="number"name="pincode" class="form-control" id="pincode" aria-describedby="emailHelp"placeholder="Enter your Phone Number"required>
+
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label" >Phone No.</label>
+      <input type="tel" pattern="[0-9]{10}" maxlength="10"title="Phone number must be exactly 10 digits" name="phone" class="form-control" id="phone" aria-describedby="emailHelp"placeholder="Enter Your Phone Number" required>
+
+    </div>
+    <br><p class="warning">{{message}}</p>
+    <button type="submit" class="btn btn-dark">Register</button>
+    <br> <br><a href="/" role="button" class="btn btn-outline-primary" style="text-decoration: none;">Go for Login </a>
+    
+  </form>
+</div> 
+{% endblock %}
+
+

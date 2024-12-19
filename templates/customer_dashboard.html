@@ -1,0 +1,154 @@
+{% extends "layout4.html" %}
+
+{% block title %}
+Customer's Dashboard
+{% endblock %}
+
+{% block content %}
+<div id="cardC" class="row row-cols-3 row-cols-md-3 g-4">
+  {% if services %}
+    {% for service in services %}
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ service.service_name }}</h5>
+            <a role="button" href="/go/{{cust_username}}/{{ service.service_id }}" class="card-text btn btn-outline-primary">Click For Services</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No Services Found!</p>
+  {% endif %}
+</div>
+<br>
+<div class="center tab tabheading">
+    <br>
+    <h3>Service Details</h3>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Service Name</th>
+          <th scope="col">Service Id</th>
+          
+          <th scope="col">Base Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if services %}
+        {% for service in services %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{service.service_name}}</td>
+          <td>{{service.service_id}}</td>
+          <td>{{service.base_price}}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7">
+            <p>No Service Found!</p>
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  {% if message %}
+  <br>
+  <p class="center" style="color:rgb(96, 30, 163)">{{message}}</p>
+  <br>
+  {% endif %}
+  <div style="margin-bottom:20px;" class="center tab tabheading">
+    <br>
+    <h3> Approved Request </h3>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Request_ID</th>
+          <th scope="col">Service Id</th>
+          <th scope="col">Offered Price</th>
+          <th scope="col">Requested Date</th>
+         
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if requests %}
+        {% for request in requests %}
+        {% if request.status =="approved" %}
+        <tr>
+          <th scope="row"><a class="profile" href="/professional_profile/{{request.professional_username}}">{{request.request_id}}</th>
+          <td>{{request.service_id}}</td>
+          <td>{{request.offered_price}}</td>
+          <td>{{request.requested_date}}</td>
+          
+          <td>
+            
+            <a href="/close/{{cust_username}}/{{ request.request_id}}" role="button" class="btn btn-outline-danger">Completed</a>
+            
+          </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7">
+            <p>No Requests Found!</p>
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div style="margin-bottom:20px;" class="center tab tabheading">
+    <br>
+    <h3>Request History</h3>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Request Id</th>
+          <th scope="col">Service Id</th>
+          <th scope="col">Offered Price</th>
+          <th scope="col">Requested Date</th>
+          <th scope="col">Service-Rating(out of 5)</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if requests %}
+        {% for request in requests %}
+        <tr>
+          <th scope="row"><a class="profile" href="/professional_profile/{{request.professional_username}}">{{request.request_id}}</th>
+          <td>{{request.service_id}}</td>
+          <td>{{request.offered_price}}</td>
+          <td>{{request.requested_date}}</td>
+          <td>{{request.rating}}</td>
+          <td>
+            {% if request.status == "approved" %}
+            
+            <p>Looking For Closed</p>
+            {% else %}
+            <p>{{ request.status }}</p>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7">
+            <p>No Service Found!</p>
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

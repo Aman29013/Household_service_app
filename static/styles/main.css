@@ -1,0 +1,106 @@
+*{
+    margin:0px;
+font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+/* .my_container{
+     width:80%;  */
+    /* margin-top:10px; */
+    /* margin-bottom:10px; */
+    /* margin-left:50px; */
+    /* margin-right:50px; */
+    /* border:2px solid black; */
+    /* border-radius:20px; */
+    /* justify-content: center;
+} */
+
+.my_panel{
+    width:80%;
+    margin:auto;
+    height:auto;
+    /* border:1px dashed black; */
+}
+.input_forms{
+    border:1px solid blue;
+    width:600px;
+    height:100%;
+    margin:auto;
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:10px;
+    border-radius:10px;
+    font-size:16px;
+    text-align:justify;
+
+}
+.center{
+    text-align:center;
+    margin:auto;
+    color:rgb(62, 62, 75);
+}
+.tab{
+    border:2px solid black; width:90%;border-radius:10px;
+    margin:auto;
+    /* text-align: left; */
+    
+}
+.tabheading{
+    background-color: rgb(239, 246, 252);
+}
+.navwidth{
+    width:100%;
+}
+.warning{
+    color:rgb(250, 44, 17)
+
+}
+
+#cardC{
+    
+    width:70%;
+    margin-left:13%;
+    margin-right:40px;
+}
+.card-title{
+    color:rgb(98, 98, 158) !important;
+}
+#cardC a{
+    text-decoration: none;
+}
+.card-body{
+    background-color: rgb(237, 249, 248);
+    border: 1px solid rgb(98, 98, 158)!important;
+    border-radius:4px;
+}
+
+.profile{
+    text-decoration: none;
+    color:black;
+}
+
+.profile:hover{
+    color:rgb(26, 31, 159);
+}
+
+.heading{
+    color:rgb(83, 79, 197);
+}
+
+.image{
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+    margin: 20px 0;
+}
+
+.image_in{
+    width: 100%; 
+    max-width: 600px; 
+    border: 1px solid #ccc; 
+    padding: 10px;
+}
+
+
+
+
+

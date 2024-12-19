@@ -1,0 +1,134 @@
+{% extends "layout3.html" %}
+
+{% block title %}
+    Professional's Dashboard
+{% endblock %}
+
+{% block content %}
+
+{% if base_price %}
+<p style="text-align:center;">Fixed price for <b> {{serv_name}}</b> is :{{base_price}} </p>
+{% endif %}
+<!-- Available Requests Table -->
+<div class="center tab tabheading">
+    <br>
+    <h3>Available Requests</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Service ID</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Offered Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+                {% if req.status == "pending" and (req.professional_username=="No" or req.professional_username==prof_username)%}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><a class="profile" href="/customer_profile/{{req.customer_username}}">{{ req.customer_username }}</a></td>
+                        <td>{{ req.service_id }}</td>
+                        <td>{{ req.requested_date }}</td>
+                        <td>{{ req.offered_price }}</td>
+                        <td>
+                            <span style="margin:1px;">
+                                <!-- <a href="/acceptR/{{ req.request_id}}/{{prof_username}}" role="button" class="btn btn-outline-success">Accept</a> -->
+                                <a href="/acceptR/{{serv_id}}/{{prof_username}}/{{req.request_id}}" role="button" class="btn btn-outline-success">Accept</a>
+
+                            </span>
+                           
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<!-- Service Status Table (Approved Requests) -->
+<div  class="center tab tabheading">
+    <br>
+    <h3>Request Status </h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Service ID</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Offered Price</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+                {% if req.status == "approved" and  req.professional_username==prof_username %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><a class="profile" href="/customer_profile/{{req.customer_username}}">{{ req.customer_username }}</td>
+                        <td>{{ req.service_id }}</td>
+                        <td>{{ req.requested_date }}</td>
+                        <td>{{ req.offered_price }}</td>
+                        <td>
+                          <span style="margin:1px;">
+                            <a href="/close/{{prof_username}}/{{req.request_id}}" role="button" class="btn btn-outline-success">Completed</a>
+                        </span>
+                        <span style="margin:1px;">
+                            <a href="/rejectR/{{serv_id}}/{{prof_username}}/{{req.request_id}}" role="button" class="btn btn-outline-danger">Reject</a>
+                        </span>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<!-- Closed Services Table -->
+<div style="margin-bottom:20px;" class="center tab tabheading">
+    <br>
+    <h3>Closed Services</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Service ID</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Offered Price</th>
+                <th scope="col">Service-Rating(out of 5)</th>
+                <th scope="col">Status</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+                {% if req.status=="closed" and  req.professional_username==prof_username %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><a class="profile" href="/customer_profile/{{req.customer_username}}">{{ req.customer_username }}</td>
+                        <td>{{ req.service_id }}</td>
+                        <td>{{ req.requested_date }}</td>
+                        <td>{{ req.offered_price }}</td>
+                        <td>{{req.rating}}</td>
+                        <td>
+                          <p>Closed</p> 
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

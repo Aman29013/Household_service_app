@@ -1,0 +1,81 @@
+{% extends  "layout4.html" %}
+
+{% block title %}
+Customer's Search Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="center" style="padding-top:50px;">
+  <h3>Search for services:</h3>
+</div>
+<div class="my_panel" style="width:50%;">
+    <div >
+      <form class="input_forms tabheading" method="POST" action="/c_search/{{cust_username}}" role="search">
+        <div><label for="Search">Search (by: Service-Name,Pincode,Service)</label></div><br>
+        <div><input id="search" name="search" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" ><br>
+        <button class="btn btn-outline-success" type="submit">Search</button></div> 
+      </form>
+    </div>
+  </div>
+<div class="center tab tabheading">
+      <br>
+            {% if request.args.get('message') %}
+        <div class="alert alert-success">
+          <p>{{ request.args.get('message') }}</p>
+        </div>
+        <br>
+      {% endif %}
+
+      <h3>Search Results </h3>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Email</th>
+            <th scope="col">Name</th>
+            <th scope="col">Experience(in years)</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Rating(Out of 5)</th>
+            <th scope="col">Address</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if results %}
+          
+          {% for result in results %}
+          {% if result.block_status == "active" %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td><a class="profile" href="/professional_profile/{{result.username}}">{{result.username}}</a></td>
+            <td>{{result.name}}</td>
+            <td>{{result.experience}}</td>
+            <td>{{result.service_name}}</td>
+            <td>{{result.rating}}</td>
+            <td>{{result.address}},{{result.pincode}}
+            </td>
+            <td>
+              <form method="POST" action="/book_S/{{cust_username}}/{{ result.username }}">
+                <button type="submit" class="btn btn-outline-success">BOOK</button>
+            </form>
+            <!-- <span style="margin:1px;"><a href="/bookP" role="button"
+              class="btn btn-outline-success">BOOK</a></span> -->
+            </td>
+          </tr>
+          {% else %}
+            <td colspan="6"><p>No Results Found!</p></td>
+          {% endif %}
+        {% endfor  %}
+            
+           
+          {% else %}
+          <td colspan="7"><p>No Results Found!</p></td>
+          {% endif %}
+        
+        </tbody>
+      </table>
+      </div>
+    
+  
+{% endblock %}

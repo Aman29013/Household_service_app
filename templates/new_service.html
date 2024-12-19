@@ -1,0 +1,44 @@
+{% extends "layout2.html" %}
+
+{% block title %}
+    New Service Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- <div class="center">
+   <h1>Welcome to Household Service App</h1> -->
+<!-- </div> -->
+<div class="input_forms"style="background-color:azure;">
+  <div class="center" style="color:rgb(89, 89, 253)">
+    <h1>New Service</h1>
+  </div>
+
+  <form method="POST" action="/new_service/{{admin_username}}">
+    <div class="mb-3">
+      <label for="service_n" class="form-label">Service Name</label>
+      
+      <select name="service_name"class="form-control" id="service_n" required>
+        <option value="" disabled selected>Select Your Service</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Painter">Painter</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Cleaner">Cleaner</option>
+
+      </select>
+      
+
+    </div>
+    <div class="mb-3">
+      <label for="baseprice" class="form-label">Base-Price</label>
+      <input type="number"name="base_price" class="form-control" id="baseprice" placeholder="Enter baseprice " required>
+    </div>
+    <br><p class="warning">{{message}}</p>
+    <div><button type="submit" class="btn btn-outline-success">Add</button></div>
+    
+    
+  </form>
+</div>
+{% endblock %}
+
